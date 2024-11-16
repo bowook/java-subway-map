@@ -1,2 +1,4 @@
-package subway.service;public class SelectionService {
+package subway.service;
+
+public class SelectionService {
 }
