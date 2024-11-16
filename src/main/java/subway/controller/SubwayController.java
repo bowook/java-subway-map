@@ -66,6 +66,34 @@ public class SubwayController {
     private void mainSelection(MainSelectionDTO selectionDTO) {
         if (selectionDTO.getSelection().equals("1")) {
             stationManagement();
+            return;
+        }
+        if (selectionDTO.getSelection().equals("2")) {
+            lineManagement();
+        }
+    }
+
+    private void lineManagement() {
+        outputView.writeLineScreen();
+        StationSelectionDTO stationSelectionDTO = getValidatedStationSelection();
+        lineSelection(stationSelectionDTO);
+    }
+
+    private void lineSelection(StationSelectionDTO stationSelectionDTO) {
+        if (stationSelectionDTO.getSelection().equals("1")) {
+            registerLine();
+        }
+    }
+
+    private void registerLine() {
+        while (true) {
+            try {
+                stationService.registerLine(inputView.readLineName());
+                //상행 노선 종점역
+                //하행 노선 종점역 입력 받아야됨
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
         }
     }
 

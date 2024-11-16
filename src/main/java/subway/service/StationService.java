@@ -1,9 +1,11 @@
 package subway.service;
 
 import java.util.List;
+import subway.domain.Line;
 import subway.domain.Station;
 import subway.exception.ErrorMessage;
 import subway.exception.SubwayException;
+import subway.repository.LineRepository;
 import subway.repository.StationRepository;
 
 public class StationService {
@@ -23,5 +25,12 @@ public class StationService {
 
     public List<Station> checkStation() {
         return StationRepository.stations();
+    }
+
+    public void registerLine(String lineName) {
+        if (LineRepository.existsByLineName(lineName)) {
+            throw SubwayException.from(ErrorMessage.ALREADY_REGISTER_LINE_NAME);
+        }
+        LineRepository.addLine(new Line(lineName));
     }
 }
