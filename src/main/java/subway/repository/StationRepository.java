@@ -13,11 +13,16 @@ public class StationRepository {
         return Collections.unmodifiableList(stations);
     }
 
+    public static boolean deleteStation(String name) {
+        return stations.removeIf(station -> Objects.equals(station.getName(), name));
+    }
+
     public static void addStation(Station station) {
         stations.add(station);
     }
 
-    public static boolean deleteStation(String name) {
-        return stations.removeIf(station -> Objects.equals(station.getName(), name));
+    public static boolean existsByName(String name) {
+        return stations.stream().anyMatch(station -> Objects.equals(station.getName(), name));
     }
+
 }
