@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class InputView {
     private final static String CHOOSE_HOPE_FUNCTION = "## 원하는 기능을 선택하세요.";
     private final static String REGISTER_STATION = "## 등록할 역 이름을 입력하세요.";
+    private final static String DELETE_STATION = "## 삭제할 역 이름을 입력하세요.";
 
     public String readHopeFunction() {
         System.out.println(CHOOSE_HOPE_FUNCTION);
@@ -27,5 +28,11 @@ public class InputView {
 
     private void scannerClose() {
         getScanner().close();
+    }
+
+    public String readDeleteStationName() {
+        System.out.print(System.lineSeparator());
+        System.out.println(DELETE_STATION);
+        return scannerInput();
     }
 }

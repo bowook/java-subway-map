@@ -6,7 +6,8 @@ public enum ErrorMessage {
     SUBWAY_STATION_NAME_LENGTH("역 이름은 2글자 이상이어야 합니다."),
     SUBWAY_STATION_NAME_NUMBER("역 이름은 숫자가 들어갈 수 없습니다."),
     SUBWAY_STATION_EMPTY_NAME("역 이름은 비어있을 수 없습니다."),
-    SUBWAY_STATION_NAME_CONTAINS_EMPTY_NAME("역 이름은 비어있는 문자열이 들어갈 수 없습니다.");
+    SUBWAY_STATION_NAME_CONTAINS_EMPTY_NAME("역 이름은 비어있는 문자열이 들어갈 수 없습니다."),
+    SUBWAY_STATION_NOT_PRESENCE("역 이름이 존재하지 않습니다.");
 
     private final String errorMessage;
 

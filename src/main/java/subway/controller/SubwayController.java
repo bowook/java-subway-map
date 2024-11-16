@@ -26,28 +26,43 @@ public class SubwayController {
             if (selectionDTO.getSelection().equals("Q")) {
                 break;
             }
-            transmissionSelection(selectionDTO);
+            mainSelection(selectionDTO);
         }
     }
 
     private void stationManagement() {
-        while (true) {
-            outputView.writeStationScreen();
-            StationSelectionDTO stationSelectionDTO = getValidatedStationSelection();
-            if (stationSelectionDTO.getSelection().equals("B")) {
-                break;
-            }
-            stationSelection(stationSelectionDTO);
-        }
+        outputView.writeStationScreen();
+        StationSelectionDTO stationSelectionDTO = getValidatedStationSelection();
+        stationSelection(stationSelectionDTO);
     }
 
     private void stationSelection(StationSelectionDTO stationSelectionDTO) {
         if (stationSelectionDTO.getSelection().equals("1")) {
             registerStation();
+            return;
+        }
+        if (stationSelectionDTO.getSelection().equals("2")) {
+            deleteStation();
+            return;
+        }
+        if (stationSelectionDTO.getSelection().equals("B")) {
+            return;
         }
     }
 
-    private void transmissionSelection(MainSelectionDTO selectionDTO) {
+    private void deleteStation() {
+        while (true) {
+            try {
+                stationService.deleteStation(inputView.readDeleteStationName());
+                outputView.writeStationDelete();
+                break;
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
+        }
+    }
+
+    private void mainSelection(MainSelectionDTO selectionDTO) {
         if (selectionDTO.getSelection().equals("1")) {
             stationManagement();
         }

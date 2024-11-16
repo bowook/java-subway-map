@@ -3,8 +3,8 @@ package subway.view;
 public class OutputView {
     private final static String MAIN_SCREEN = "## 메인 화면";
     private final static String STATION_MANAGEMENT = "1. 역 관리";
-    private final static String LINE_MANAGEMENT = "2. 노선 관리";
-    private final static String ROUTE_MANAGEMENT = "3. 구간 관리";
+    private final static String ROUTE_MANAGEMENT = "2. 노선 관리";
+    private final static String LINE_MANAGEMENT = "3. 구간 관리";
     private final static String WRITE_SUBWAY_LINE = "4. 지하철 노선도 출력";
     private final static String EXIT = "Q. 종료";
 
@@ -15,12 +15,14 @@ public class OutputView {
     private final static String STATION_SELECT = "3. 역 조회";
     private final static String BACK = "B. 돌아가기";
     private final static String INFO_STATION_REGISTER = "[INFO] 지하철 역이 등록되었습니다.";
+    private final static String INFO_STATION_DELETE = "[INFO] 지하철 역이 삭제되었습니다.";
 
     public void writeMainScreen() {
+        System.out.print(writeNewLine());
         System.out.println(MAIN_SCREEN);
         System.out.println(STATION_MANAGEMENT);
-        System.out.println(LINE_MANAGEMENT);
         System.out.println(ROUTE_MANAGEMENT);
+        System.out.println(LINE_MANAGEMENT);
         System.out.println(WRITE_SUBWAY_LINE);
         System.out.println(EXIT);
         System.out.print(writeNewLine());
@@ -47,5 +49,10 @@ public class OutputView {
     public void writeStationRegisterInfo() {
         System.out.print(writeNewLine());
         System.out.println(INFO_STATION_REGISTER);
+    }
+
+    public void writeStationDelete() {
+        System.out.print(writeNewLine());
+        System.out.println(INFO_STATION_DELETE);
     }
 }
