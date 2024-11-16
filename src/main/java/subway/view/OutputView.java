@@ -1,5 +1,8 @@
 package subway.view;
 
+import java.util.List;
+import subway.domain.Station;
+
 public class OutputView {
     private final static String MAIN_SCREEN = "## 메인 화면";
     private final static String STATION_MANAGEMENT = "1. 역 관리";
@@ -16,6 +19,7 @@ public class OutputView {
     private final static String BACK = "B. 돌아가기";
     private final static String INFO_STATION_REGISTER = "[INFO] 지하철 역이 등록되었습니다.";
     private final static String INFO_STATION_DELETE = "[INFO] 지하철 역이 삭제되었습니다.";
+    private final static String INFO = "[INFO] ";
 
     public void writeMainScreen() {
         System.out.print(writeNewLine());
@@ -36,6 +40,12 @@ public class OutputView {
         System.out.println(STATION_SELECT);
         System.out.println(BACK);
         System.out.print(writeNewLine());
+    }
+
+    public void writeStationInventory(List<Station> stations) {
+        for (Station station : stations) {
+            System.out.println(INFO + station.getName());
+        }
     }
 
     public void writeErrorMessage(String errorMessage) {

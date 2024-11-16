@@ -1,5 +1,6 @@
 package subway.service;
 
+import java.util.List;
 import subway.domain.Station;
 import subway.exception.ErrorMessage;
 import subway.exception.SubwayException;
@@ -18,5 +19,9 @@ public class StationService {
         if (!StationRepository.deleteStation(stationName)) {
             throw SubwayException.from(ErrorMessage.SUBWAY_STATION_NOT_PRESENCE);
         }
+    }
+
+    public List<Station> checkStation() {
+        return StationRepository.stations();
     }
 }

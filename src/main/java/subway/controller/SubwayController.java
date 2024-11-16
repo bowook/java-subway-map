@@ -45,10 +45,11 @@ public class SubwayController {
             deleteStation();
             return;
         }
-        if (stationSelectionDTO.getSelection().equals("B")) {
-            return;
+        if (stationSelectionDTO.getSelection().equals("3")) {
+            outputView.writeStationInventory(stationService.checkStation());
         }
     }
+
 
     private void deleteStation() {
         while (true) {
