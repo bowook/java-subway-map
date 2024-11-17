@@ -10,6 +10,9 @@ public class InputView {
     private final static String REGISTER_START_LINE = "## 등록할 노선의 상행 종점역 이름을 입력하세요.";
     private final static String REGISTER_END_LINE = "## 등록할 노선의 하행 종점역 이름을 입력하세요.";
     private final static String DELETE_LINE = "## 삭제할 노선 이름을 입력하세요.";
+    private final static String REGISTER_LINE_BY_ROUTE = "## 노선을 입력하세요.";
+    private final static String REGISTER_STATION_BY_ROUTE = "## 역이름을 입력하세요.";
+    private final static String REGISTER_ORDER_BY_ROUTE = "## 순서를 입력하세요.";
 
     public String readStartLine() {
         System.out.print(System.lineSeparator());
@@ -61,6 +64,24 @@ public class InputView {
     public String readDeleteLineName() {
         System.out.print(System.lineSeparator());
         System.out.println(DELETE_LINE);
+        return scannerInput();
+    }
+
+    public String readLineByRoute() {
+        System.out.print(System.lineSeparator());
+        System.out.println(REGISTER_LINE_BY_ROUTE);
+        return scannerInput();
+    }
+
+    public String readStationByRoute() {
+        System.out.print(System.lineSeparator());
+        System.out.println(REGISTER_STATION_BY_ROUTE);
+        return scannerInput();
+    }
+
+    public String readOrderByRoute() {
+        System.out.print(System.lineSeparator());
+        System.out.println(REGISTER_ORDER_BY_ROUTE);
         return scannerInput();
     }
 }

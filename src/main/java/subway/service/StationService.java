@@ -74,4 +74,38 @@ public class StationService {
         RouteRepository.deleteRouteByLine(line);
         LineRepository.deleteLineByName(lineName);
     }
+
+    public Line registerLineByRoute(String lineName) {
+        Line line = LineRepository.findLineByName(lineName);
+        if (line == null) {
+            throw SubwayException.from(ErrorMessage.LINE_NAME_NOT_PRESENCE);
+        }
+        return line;
+    }
+
+    public Station registerStationByRoute(String stationName) {
+        Station station = StationRepository.getStation(stationName);
+        if (station == null) {
+            throw SubwayException.from(ErrorMessage.SUBWAY_STATION_NOT_PRESENCE);
+        }
+        return station;
+    }
+
+    public int registerOrderByRoute(String order) {
+        int parsedNumber;
+        try {
+            parsedNumber = Integer.parseInt(order);
+        } catch (NumberFormatException numberFormatException) {
+            throw SubwayException.from(ErrorMessage.ORDER_IS_NOT_NUMBER);
+        }
+        if (parsedNumber <= 0) {
+            throw SubwayException.from(ErrorMessage.ORDER_IS_NOT_MINUS);
+        }
+        return parsedNumber;
+    }
+
+    public void registerRoute(Line line, Station station, int order) {
+        Route route = RouteRepository.findRouteByLine(line);
+        route.addByOrder(station, order);
+    }
 }

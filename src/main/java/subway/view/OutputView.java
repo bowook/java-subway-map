@@ -27,6 +27,11 @@ public class OutputView {
     private final static String LINE_DELETE = "2. 노선 삭제";
     private final static String LINE_CHECK = "3. 노선 조회";
     private final static String LINE_INVENTORY = "## 노선 목록";
+    //-------------------------------------------------------------------//
+    private final static String ROUTE_SCREEN = "## 구간 관리 화면";
+    private final static String ROUTE_REGISTER = "1. 구간 등록";
+    private final static String ROUTE_DELETE = "2. 구간 삭제";
+    private final static String INFO_ROUTE_REGISTER = "[INFO] 구간이 등록되었습니다.";
 
     public void writeMainScreen() {
         System.out.print(writeNewLine());
@@ -89,5 +94,19 @@ public class OutputView {
         for (Line line : lines) {
             System.out.println(INFO + line.getName());
         }
+    }
+
+    public void writeRouteScreen() {
+        System.out.print(writeNewLine());
+        System.out.println(ROUTE_SCREEN);
+        System.out.println(ROUTE_REGISTER);
+        System.out.println(ROUTE_DELETE);
+        System.out.println(BACK);
+        System.out.print(writeNewLine());
+    }
+
+    public void writeRouteRegister() {
+        System.out.print(writeNewLine());
+        System.out.println(INFO_ROUTE_REGISTER);
     }
 }

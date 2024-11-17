@@ -16,4 +16,11 @@ public class Route {
     public Map<Line, List<Station>> getRoute() {
         return route;
     }
+
+    public void addByOrder(Station station, int order) {
+        for (List<Station> stations : route.values()) {
+            stations.add(order - 1, station);
+            return;
+        }
+    }
 }

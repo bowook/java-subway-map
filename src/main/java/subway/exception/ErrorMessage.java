@@ -10,7 +10,9 @@ public enum ErrorMessage {
     SUBWAY_STATION_NOT_PRESENCE("역 이름이 존재하지 않습니다."),
     ALREADY_REGISTER_LINE_NAME("이미 등록된 노선 이름입니다."),
     REGISTERED_STATION_NAME("노선에 등록된 역 이름은 삭제할 수 없습니다."),
-    LINE_NAME_NOT_PRESENCE("삭제할 노선이 존재하지 않습니다.");
+    LINE_NAME_NOT_PRESENCE("삭제할 노선이 존재하지 않습니다."),
+    ORDER_IS_NOT_NUMBER("순서는 숫자를 입력하셔야 합니다."),
+    ORDER_IS_NOT_MINUS("순서는 1보다 크거나 같은 수를 입력하셔야 합니다.");
 
     private final String errorMessage;
 

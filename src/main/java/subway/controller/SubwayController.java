@@ -1,7 +1,9 @@
 package subway.controller;
 
 import subway.domain.Line;
+import subway.domain.Station;
 import subway.dto.MainSelectionDTO;
+import subway.dto.RouteSelectionDTO;
 import subway.dto.StationSelectionDTO;
 import subway.exception.SubwayException;
 import subway.repository.LineRepository;
@@ -72,6 +74,68 @@ public class SubwayController {
         }
         if (selectionDTO.getSelection().equals("2")) {
             lineManagement();
+            return;
+        }
+        if (selectionDTO.getSelection().equals("3")) {
+            routeManagement();
+            return;
+        }
+    }
+
+    private void routeManagement() {
+        outputView.writeRouteScreen();
+        RouteSelectionDTO routeSelectionDTO = getValidatedRouteSelection();
+        routeSelection(routeSelectionDTO);
+    }
+
+    private void routeSelection(RouteSelectionDTO routeSelectionDTO) {
+        if (routeSelectionDTO.getSelection().equals("1")) {
+            registerRoute();
+        }
+    }
+
+    private void registerRoute() {
+        while (true) {
+            try {
+                Line line = stationService.registerLineByRoute(inputView.readLineByRoute());
+                Station station = registerStationByRoute();
+                int order = registerOrderByRoute();
+                stationService.registerRoute(line, station, order);
+                outputView.writeRouteRegister();
+                break;
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
+        }
+    }
+
+    private int registerOrderByRoute() {
+        while (true) {
+            try {
+                return stationService.registerOrderByRoute(inputView.readOrderByRoute());
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
+        }
+    }
+
+    private Station registerStationByRoute() {
+        while (true) {
+            try {
+                return stationService.registerStationByRoute(inputView.readStationByRoute());
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
+        }
+    }
+
+    private RouteSelectionDTO getValidatedRouteSelection() {
+        while (true) {
+            try {
+                return new RouteSelectionDTO(inputView.readHopeFunction());
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
         }
     }
 
@@ -91,13 +155,9 @@ public class SubwayController {
             return;
         }
         if (stationSelectionDTO.getSelection().equals("3")) {
-            checkLine();
+            outputView.writeLineCheck(LineRepository.lines());
         }
 
-    }
-
-    private void checkLine() {
-        outputView.writeLineCheck(LineRepository.lines());
     }
 
     private void deleteLine() {
