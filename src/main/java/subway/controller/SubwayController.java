@@ -1,5 +1,6 @@
 package subway.controller;
 
+import subway.domain.Line;
 import subway.dto.MainSelectionDTO;
 import subway.dto.StationSelectionDTO;
 import subway.exception.SubwayException;
@@ -88,9 +89,33 @@ public class SubwayController {
     private void registerLine() {
         while (true) {
             try {
-                stationService.registerLine(inputView.readLineName());
-                //상행 노선 종점역
-                //하행 노선 종점역 입력 받아야됨
+                String lineName = inputView.readLineName();
+                Line newLine = stationService.registerLine(lineName);
+                registerStartLine(newLine);
+                registerEndLine(newLine);
+                break;
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
+        }
+    }
+
+    private void registerStartLine(Line newLine) {
+        while (true) {
+            try {
+                stationService.registerStartLine(newLine, inputView.readStartLine());
+                break;
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
+        }
+    }
+
+    private void registerEndLine(Line newLine) {
+        while (true) {
+            try {
+                stationService.registerEndLine(newLine, inputView.readEndLine());
+                break;
             } catch (SubwayException subwayException) {
                 outputView.writeErrorMessage(subwayException.getMessage());
             }

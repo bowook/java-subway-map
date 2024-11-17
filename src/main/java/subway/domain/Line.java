@@ -4,7 +4,6 @@ import subway.exception.ErrorMessage;
 import subway.exception.SubwayException;
 
 public class Line {
-    //노선
     private String name;
 
     public Line(String name) {

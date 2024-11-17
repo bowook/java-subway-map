@@ -21,8 +21,11 @@ public class StationRepository {
         stations.add(station);
     }
 
-    public static boolean existsByName(String name) {
-        return stations.stream().anyMatch(station -> Objects.equals(station.getName(), name));
+    public static Station getStation(String name) {
+        return stations.stream()
+                .filter(station -> Objects.equals(station.getName(), name))
+                .findFirst()
+                .orElse(null);
     }
 
 }

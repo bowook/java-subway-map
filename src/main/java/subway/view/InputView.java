@@ -10,6 +10,18 @@ public class InputView {
     private final static String REGISTER_START_LINE = "## 등록할 노선의 상행 종점역 이름을 입력하세요.";
     private final static String REGISTER_END_LINE = "## 등록할 노선의 하행 종점역 이름을 입력하세요.";
 
+    public String readStartLine() {
+        System.out.print(System.lineSeparator());
+        System.out.println(REGISTER_START_LINE);
+        return scannerInput();
+    }
+
+    public String readEndLine() {
+        System.out.print(System.lineSeparator());
+        System.out.println(REGISTER_END_LINE);
+        return scannerInput();
+    }
+
     public String readHopeFunction() {
         System.out.println(CHOOSE_HOPE_FUNCTION);
         return scannerInput();
