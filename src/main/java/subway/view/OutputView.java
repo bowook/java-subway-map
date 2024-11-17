@@ -1,6 +1,7 @@
 package subway.view;
 
 import java.util.List;
+import subway.domain.Line;
 import subway.domain.Station;
 
 public class OutputView {
@@ -25,6 +26,7 @@ public class OutputView {
     private final static String LINE_REGISTER = "1. 노선 등록";
     private final static String LINE_DELETE = "2. 노선 삭제";
     private final static String LINE_CHECK = "3. 노선 조회";
+    private final static String LINE_INVENTORY = "## 노선 목록";
 
     public void writeMainScreen() {
         System.out.print(writeNewLine());
@@ -79,5 +81,13 @@ public class OutputView {
         System.out.println(LINE_CHECK);
         System.out.println(BACK);
         System.out.print(writeNewLine());
+    }
+
+    public void writeLineCheck(List<Line> lines) {
+        System.out.print(writeNewLine());
+        System.out.println(LINE_INVENTORY);
+        for (Line line : lines) {
+            System.out.println(INFO + line.getName());
+        }
     }
 }

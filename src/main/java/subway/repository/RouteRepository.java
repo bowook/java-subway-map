@@ -25,4 +25,8 @@ public class RouteRepository {
     public static void addRoute(Route route) {
         routes.add(route);
     }
+
+    public static void deleteRouteByLine(Line line) {
+        routes.removeIf(route -> route.getRoute().containsKey(line));
+    }
 }

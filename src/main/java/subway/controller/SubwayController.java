@@ -4,6 +4,7 @@ import subway.domain.Line;
 import subway.dto.MainSelectionDTO;
 import subway.dto.StationSelectionDTO;
 import subway.exception.SubwayException;
+import subway.repository.LineRepository;
 import subway.service.StationService;
 import subway.view.InputView;
 import subway.view.OutputView;
@@ -83,6 +84,30 @@ public class SubwayController {
     private void lineSelection(StationSelectionDTO stationSelectionDTO) {
         if (stationSelectionDTO.getSelection().equals("1")) {
             registerLine();
+            return;
+        }
+        if (stationSelectionDTO.getSelection().equals("2")) {
+            deleteLine();
+            return;
+        }
+        if (stationSelectionDTO.getSelection().equals("3")) {
+            checkLine();
+        }
+
+    }
+
+    private void checkLine() {
+        outputView.writeLineCheck(LineRepository.lines());
+    }
+
+    private void deleteLine() {
+        while (true) {
+            try {
+                stationService.deleteLine(inputView.readDeleteLineName());
+                break;
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
         }
     }
 

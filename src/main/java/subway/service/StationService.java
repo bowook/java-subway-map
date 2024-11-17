@@ -26,13 +26,12 @@ public class StationService {
         if (!StationRepository.deleteStation(stationName)) {
             throw SubwayException.from(ErrorMessage.SUBWAY_STATION_NOT_PRESENCE);
         }
-        StationRepository.deleteStation(stationName);
     }
 
     private void isLineStation(Station station, Route route) {
         for (List<Station> stations : route.getRoute().values()) {
             if (stations.contains(station)) {
-                throw SubwayException.from(ErrorMessage.SUBWAY_STATION_NOT_PRESENCE);
+                throw SubwayException.from(ErrorMessage.REGISTERED_STATION_NAME);
             }
         }
     }
@@ -42,7 +41,7 @@ public class StationService {
     }
 
     public Line registerLine(String lineName) {
-        if (LineRepository.existsByLineName(lineName)) {
+        if (LineRepository.findLineByName(lineName) != null) {
             throw SubwayException.from(ErrorMessage.ALREADY_REGISTER_LINE_NAME);
         }
         Line newLine = new Line(lineName);
@@ -66,5 +65,13 @@ public class StationService {
         Route route = RouteRepository.findRouteByLine(line);
         route.getRoute().get(line).add(station);
     }
-    
+
+    public void deleteLine(String lineName) {
+        Line line = LineRepository.findLineByName(lineName);
+        if (line == null) {
+            throw SubwayException.from(ErrorMessage.LINE_NAME_NOT_PRESENCE);
+        }
+        RouteRepository.deleteRouteByLine(line);
+        LineRepository.deleteLineByName(lineName);
+    }
 }

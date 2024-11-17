@@ -9,6 +9,7 @@ public class InputView {
     private final static String REGISTER_LINE = "## 등록할 노선 이름을 입력하세요.";
     private final static String REGISTER_START_LINE = "## 등록할 노선의 상행 종점역 이름을 입력하세요.";
     private final static String REGISTER_END_LINE = "## 등록할 노선의 하행 종점역 이름을 입력하세요.";
+    private final static String DELETE_LINE = "## 삭제할 노선 이름을 입력하세요.";
 
     public String readStartLine() {
         System.out.print(System.lineSeparator());
@@ -54,6 +55,12 @@ public class InputView {
     public String readLineName() {
         System.out.print(System.lineSeparator());
         System.out.println(REGISTER_LINE);
+        return scannerInput();
+    }
+
+    public String readDeleteLineName() {
+        System.out.print(System.lineSeparator());
+        System.out.println(DELETE_LINE);
         return scannerInput();
     }
 }
