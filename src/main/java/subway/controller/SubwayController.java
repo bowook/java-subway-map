@@ -80,6 +80,7 @@ public class SubwayController {
             routeManagement();
             return;
         }
+        
     }
 
     private void routeManagement() {
@@ -91,6 +92,23 @@ public class SubwayController {
     private void routeSelection(RouteSelectionDTO routeSelectionDTO) {
         if (routeSelectionDTO.getSelection().equals("1")) {
             registerRoute();
+        }
+        if (routeSelectionDTO.getSelection().equals("2")) {
+            deleteRoute();
+        }
+    }
+
+    private void deleteRoute() {
+        while (true) {
+            try {
+                Line line = stationService.deleteLineByRoute(inputView.readDeleteLineNameByRoute());
+                Station station = stationService.deleteStationByRoute(inputView.readDeleteStationNameByRoute());
+                stationService.deleteRoute(line, station);
+                outputView.writeRouteDelete();
+                break;
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
         }
     }
 

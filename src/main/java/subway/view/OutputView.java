@@ -32,6 +32,7 @@ public class OutputView {
     private final static String ROUTE_REGISTER = "1. 구간 등록";
     private final static String ROUTE_DELETE = "2. 구간 삭제";
     private final static String INFO_ROUTE_REGISTER = "[INFO] 구간이 등록되었습니다.";
+    private final static String INFO_ROUTE_DELETE = "[INFO] 구간이 삭제되었습니다.";
 
     public void writeMainScreen() {
         System.out.print(writeNewLine());
@@ -108,5 +109,10 @@ public class OutputView {
     public void writeRouteRegister() {
         System.out.print(writeNewLine());
         System.out.println(INFO_ROUTE_REGISTER);
+    }
+
+    public void writeRouteDelete() {
+        System.out.print(writeNewLine());
+        System.out.println(INFO_ROUTE_DELETE);
     }
 }

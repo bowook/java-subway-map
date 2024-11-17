@@ -108,4 +108,25 @@ public class StationService {
         Route route = RouteRepository.findRouteByLine(line);
         route.addByOrder(station, order);
     }
+
+    public Line deleteLineByRoute(String lineName) {
+        Line line = LineRepository.findLineByName(lineName);
+        if (line == null) {
+            throw SubwayException.from(ErrorMessage.LINE_NAME_NOT_PRESENCE);
+        }
+        return line;
+    }
+
+    public Station deleteStationByRoute(String stationName) {
+        Station station = StationRepository.getStation(stationName);
+        if (station == null) {
+            throw SubwayException.from(ErrorMessage.SUBWAY_STATION_NOT_PRESENCE);
+        }
+        return station;
+    }
+
+    public void deleteRoute(Line line, Station station) {
+        Route route = RouteRepository.findRouteByLine(line);
+        route.deleteStation(station);
+    }
 }

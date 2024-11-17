@@ -23,4 +23,10 @@ public class Route {
             return;
         }
     }
+
+    public void deleteStation(Station station) {
+        for (List<Station> stations : route.values()) {
+            stations.remove(station);
+        }
+    }
 }
