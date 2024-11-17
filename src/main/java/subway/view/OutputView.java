@@ -28,6 +28,7 @@ public class OutputView {
     private final static String LINE_DELETE = "2. 노선 삭제";
     private final static String LINE_CHECK = "3. 노선 조회";
     private final static String LINE_INVENTORY = "## 노선 목록";
+    private final static String INFO_LINE_DELETE = "[INFO] 지하철 노선이 삭제되었습니다.";
     //-------------------------------------------------------------------//
     private final static String ROUTE_SCREEN = "## 구간 관리 화면";
     private final static String ROUTE_REGISTER = "1. 구간 등록";
@@ -139,5 +140,10 @@ public class OutputView {
             }
             System.out.print(writeNewLine());
         }
+    }
+
+    public void writeLineDelete() {
+        System.out.print(writeNewLine());
+        System.out.println(INFO_LINE_DELETE);
     }
 }

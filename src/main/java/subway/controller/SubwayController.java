@@ -105,10 +105,20 @@ public class SubwayController {
         while (true) {
             try {
                 Line line = stationService.deleteLineByRoute(inputView.readDeleteLineNameByRoute());
-                Station station = stationService.deleteStationByRoute(inputView.readDeleteStationNameByRoute());
+                Station station = deleteStationByRoute();
                 stationService.deleteRoute(line, station);
                 outputView.writeRouteDelete();
                 break;
+            } catch (SubwayException subwayException) {
+                outputView.writeErrorMessage(subwayException.getMessage());
+            }
+        }
+    }
+
+    private Station deleteStationByRoute() {
+        while (true) {
+            try {
+                return stationService.deleteStationByRoute(inputView.readDeleteStationNameByRoute());
             } catch (SubwayException subwayException) {
                 outputView.writeErrorMessage(subwayException.getMessage());
             }
@@ -185,6 +195,7 @@ public class SubwayController {
         while (true) {
             try {
                 stationService.deleteLine(inputView.readDeleteLineName());
+                outputView.writeLineDelete();
                 break;
             } catch (SubwayException subwayException) {
                 outputView.writeErrorMessage(subwayException.getMessage());

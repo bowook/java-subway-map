@@ -114,6 +114,12 @@ public class StationService {
         if (line == null) {
             throw SubwayException.from(ErrorMessage.LINE_NAME_NOT_PRESENCE);
         }
+        Route route = RouteRepository.findRouteByLine(line);
+        for (List<Station> stations : route.getRoute().values()) {
+            if (stations.size() <= 2) {
+                throw SubwayException.from(ErrorMessage.DELETE_LINE_BY_ROUTE);
+            }
+        }
         return line;
     }
 
@@ -127,11 +133,6 @@ public class StationService {
 
     public void deleteRoute(Line line, Station station) {
         Route route = RouteRepository.findRouteByLine(line);
-        for (List<Station> stations : route.getRoute().values()) {
-            if (stations.size() <= 2) {
-                throw SubwayException.from(ErrorMessage.DELETE_LINE_BY_ROUTE);
-            }
-        }
         route.deleteStation(station);
     }
 }
