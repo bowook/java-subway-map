@@ -12,7 +12,8 @@ public enum ErrorMessage {
     REGISTERED_STATION_NAME("노선에 등록된 역 이름은 삭제할 수 없습니다."),
     LINE_NAME_NOT_PRESENCE("삭제할 노선이 존재하지 않습니다."),
     ORDER_IS_NOT_NUMBER("순서는 숫자를 입력하셔야 합니다."),
-    ORDER_IS_NOT_MINUS("순서는 1보다 크거나 같은 수를 입력하셔야 합니다.");
+    ORDER_IS_NOT_MINUS("순서는 1보다 크거나 같은 수를 입력하셔야 합니다."),
+    DELETE_LINE_BY_ROUTE("노선에 포함된 역이 두개 이하일 때는 역을 제거할 수 없습니다.");
 
     private final String errorMessage;
 
