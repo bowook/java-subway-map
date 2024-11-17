@@ -125,15 +125,19 @@ public class OutputView {
         System.out.println(SUBWAY_ALL_ROUTES);
         for (Route route : routes) {
             for (Line line : route.getRoute().keySet()) {
-                for (List<Station> stations : route.getRoute().values()) {
-                    System.out.println(INFO + line.getName());
-                    System.out.println(INFO + TRIPLE_HYPHEN);
-                    for (Station station : stations) {
-                        System.out.println(INFO + station.getName());
-                    }
-                    System.out.print(writeNewLine());
-                }
+                writeLineByRoute(route, line);
             }
+        }
+    }
+
+    private void writeLineByRoute(Route route, Line line) {
+        for (List<Station> stations : route.getRoute().values()) {
+            System.out.println(INFO + line.getName());
+            System.out.println(INFO + TRIPLE_HYPHEN);
+            for (Station station : stations) {
+                System.out.println(INFO + station.getName());
+            }
+            System.out.print(writeNewLine());
         }
     }
 }
