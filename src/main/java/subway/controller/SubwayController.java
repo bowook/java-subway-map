@@ -71,15 +71,12 @@ public class SubwayController {
     private void mainSelection(MainSelectionDTO selectionDTO) {
         if (selectionDTO.getSelection().equals("1")) {
             stationManagement();
-            return;
         }
         if (selectionDTO.getSelection().equals("2")) {
             lineManagement();
-            return;
         }
         if (selectionDTO.getSelection().equals("3")) {
             routeManagement();
-            return;
         }
         if (selectionDTO.getSelection().equals("4")) {
             outputView.writeAllRoutes(RouteRepository.routes());
@@ -188,7 +185,6 @@ public class SubwayController {
         if (stationSelectionDTO.getSelection().equals("3")) {
             outputView.writeLineCheck(LineRepository.lines());
         }
-
     }
 
     private void deleteLine() {
