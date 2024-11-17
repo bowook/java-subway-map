@@ -7,6 +7,7 @@ import subway.dto.RouteSelectionDTO;
 import subway.dto.StationSelectionDTO;
 import subway.exception.SubwayException;
 import subway.repository.LineRepository;
+import subway.repository.RouteRepository;
 import subway.service.StationService;
 import subway.view.InputView;
 import subway.view.OutputView;
@@ -80,7 +81,9 @@ public class SubwayController {
             routeManagement();
             return;
         }
-        
+        if (selectionDTO.getSelection().equals("4")) {
+            outputView.writeAllRoutes(RouteRepository.routes());
+        }
     }
 
     private void routeManagement() {

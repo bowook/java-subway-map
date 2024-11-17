@@ -2,6 +2,7 @@ package subway.view;
 
 import java.util.List;
 import subway.domain.Line;
+import subway.domain.Route;
 import subway.domain.Station;
 
 public class OutputView {
@@ -33,6 +34,9 @@ public class OutputView {
     private final static String ROUTE_DELETE = "2. 구간 삭제";
     private final static String INFO_ROUTE_REGISTER = "[INFO] 구간이 등록되었습니다.";
     private final static String INFO_ROUTE_DELETE = "[INFO] 구간이 삭제되었습니다.";
+    //-------------------------------------------------------------------//
+    private final static String SUBWAY_ALL_ROUTES = "## 지하철 노선도";
+    private final static String TRIPLE_HYPHEN = "---";
 
     public void writeMainScreen() {
         System.out.print(writeNewLine());
@@ -114,5 +118,22 @@ public class OutputView {
     public void writeRouteDelete() {
         System.out.print(writeNewLine());
         System.out.println(INFO_ROUTE_DELETE);
+    }
+
+    public void writeAllRoutes(List<Route> routes) {
+        System.out.print(writeNewLine());
+        System.out.println(SUBWAY_ALL_ROUTES);
+        for (Route route : routes) {
+            for (Line line : route.getRoute().keySet()) {
+                for (List<Station> stations : route.getRoute().values()) {
+                    System.out.println(INFO + line.getName());
+                    System.out.println(INFO + TRIPLE_HYPHEN);
+                    for (Station station : stations) {
+                        System.out.println(INFO + station.getName());
+                    }
+                    System.out.print(writeNewLine());
+                }
+            }
+        }
     }
 }
