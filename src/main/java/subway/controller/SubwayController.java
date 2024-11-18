@@ -6,8 +6,6 @@ import subway.dto.MainSelectionDTO;
 import subway.dto.RouteSelectionDTO;
 import subway.dto.StationSelectionDTO;
 import subway.exception.SubwayException;
-import subway.repository.LineRepository;
-import subway.repository.RouteRepository;
 import subway.service.StationService;
 import subway.view.InputView;
 import subway.view.OutputView;
@@ -33,6 +31,7 @@ public class SubwayController {
             }
             mainSelection(selectionDTO);
         }
+        inputView.scannerClose();
     }
 
     private void mainSelection(MainSelectionDTO selectionDTO) {
@@ -46,7 +45,7 @@ public class SubwayController {
             routeManagement();
         }
         if (selectionDTO.getSelection().equals("4")) {
-            outputView.writeAllRoutes(RouteRepository.routes());
+            outputView.writeAllRoutes(stationService.routes());
         }
     }
 
@@ -74,7 +73,7 @@ public class SubwayController {
             return;
         }
         if (stationSelectionDTO.getSelection().equals("3")) {
-            outputView.writeLineCheck(LineRepository.lines());
+            outputView.writeLineCheck(stationService.lines());
         }
     }
 
