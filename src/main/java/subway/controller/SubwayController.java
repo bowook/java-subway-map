@@ -35,10 +35,19 @@ public class SubwayController {
         }
     }
 
-    private void stationManagement() {
-        outputView.writeStationScreen();
-        StationSelectionDTO stationSelectionDTO = getValidatedStationSelection();
-        stationSelection(stationSelectionDTO);
+    private void mainSelection(MainSelectionDTO selectionDTO) {
+        if (selectionDTO.getSelection().equals("1")) {
+            stationManagement();
+        }
+        if (selectionDTO.getSelection().equals("2")) {
+            lineManagement();
+        }
+        if (selectionDTO.getSelection().equals("3")) {
+            routeManagement();
+        }
+        if (selectionDTO.getSelection().equals("4")) {
+            outputView.writeAllRoutes(RouteRepository.routes());
+        }
     }
 
     private void stationSelection(StationSelectionDTO stationSelectionDTO) {
@@ -55,124 +64,6 @@ public class SubwayController {
         }
     }
 
-
-    private void deleteStation() {
-        while (true) {
-            try {
-                stationService.deleteStation(inputView.readDeleteStationName());
-                outputView.writeStationDelete();
-                break;
-            } catch (SubwayException subwayException) {
-                outputView.writeErrorMessage(subwayException.getMessage());
-            }
-        }
-    }
-
-    private void mainSelection(MainSelectionDTO selectionDTO) {
-        if (selectionDTO.getSelection().equals("1")) {
-            stationManagement();
-        }
-        if (selectionDTO.getSelection().equals("2")) {
-            lineManagement();
-        }
-        if (selectionDTO.getSelection().equals("3")) {
-            routeManagement();
-        }
-        if (selectionDTO.getSelection().equals("4")) {
-            outputView.writeAllRoutes(RouteRepository.routes());
-        }
-    }
-
-    private void routeManagement() {
-        outputView.writeRouteScreen();
-        RouteSelectionDTO routeSelectionDTO = getValidatedRouteSelection();
-        routeSelection(routeSelectionDTO);
-    }
-
-    private void routeSelection(RouteSelectionDTO routeSelectionDTO) {
-        if (routeSelectionDTO.getSelection().equals("1")) {
-            registerRoute();
-        }
-        if (routeSelectionDTO.getSelection().equals("2")) {
-            deleteRoute();
-        }
-    }
-
-    private void deleteRoute() {
-        while (true) {
-            try {
-                Line line = stationService.deleteLineByRoute(inputView.readDeleteLineNameByRoute());
-                Station station = deleteStationByRoute();
-                stationService.deleteRoute(line, station);
-                outputView.writeRouteDelete();
-                break;
-            } catch (SubwayException subwayException) {
-                outputView.writeErrorMessage(subwayException.getMessage());
-            }
-        }
-    }
-
-    private Station deleteStationByRoute() {
-        while (true) {
-            try {
-                return stationService.deleteStationByRoute(inputView.readDeleteStationNameByRoute());
-            } catch (SubwayException subwayException) {
-                outputView.writeErrorMessage(subwayException.getMessage());
-            }
-        }
-    }
-
-    private void registerRoute() {
-        while (true) {
-            try {
-                Line line = stationService.registerLineByRoute(inputView.readLineByRoute());
-                Station station = registerStationByRoute();
-                int order = registerOrderByRoute();
-                stationService.registerRoute(line, station, order);
-                outputView.writeRouteRegister();
-                break;
-            } catch (SubwayException subwayException) {
-                outputView.writeErrorMessage(subwayException.getMessage());
-            }
-        }
-    }
-
-    private int registerOrderByRoute() {
-        while (true) {
-            try {
-                return stationService.registerOrderByRoute(inputView.readOrderByRoute());
-            } catch (SubwayException subwayException) {
-                outputView.writeErrorMessage(subwayException.getMessage());
-            }
-        }
-    }
-
-    private Station registerStationByRoute() {
-        while (true) {
-            try {
-                return stationService.registerStationByRoute(inputView.readStationByRoute());
-            } catch (SubwayException subwayException) {
-                outputView.writeErrorMessage(subwayException.getMessage());
-            }
-        }
-    }
-
-    private RouteSelectionDTO getValidatedRouteSelection() {
-        while (true) {
-            try {
-                return new RouteSelectionDTO(inputView.readHopeFunction());
-            } catch (SubwayException subwayException) {
-                outputView.writeErrorMessage(subwayException.getMessage());
-            }
-        }
-    }
-
-    private void lineManagement() {
-        outputView.writeLineScreen();
-        StationSelectionDTO stationSelectionDTO = getValidatedStationSelection();
-        lineSelection(stationSelectionDTO);
-    }
-
     private void lineSelection(StationSelectionDTO stationSelectionDTO) {
         if (stationSelectionDTO.getSelection().equals("1")) {
             registerLine();
@@ -187,11 +78,21 @@ public class SubwayController {
         }
     }
 
-    private void deleteLine() {
+    private void routeSelection(RouteSelectionDTO routeSelectionDTO) {
+        if (routeSelectionDTO.getSelection().equals("1")) {
+            registerRoute();
+        }
+        if (routeSelectionDTO.getSelection().equals("2")) {
+            deleteRoute();
+        }
+    }
+
+    private void stationManagement() {
         while (true) {
             try {
-                stationService.deleteLine(inputView.readDeleteLineName());
-                outputView.writeLineDelete();
+                outputView.writeStationScreen();
+                StationSelectionDTO stationSelectionDTO = getValidatedStationSelection();
+                stationSelection(stationSelectionDTO);
                 break;
             } catch (SubwayException subwayException) {
                 outputView.writeErrorMessage(subwayException.getMessage());
@@ -199,13 +100,12 @@ public class SubwayController {
         }
     }
 
-    private void registerLine() {
+    private void lineManagement() {
         while (true) {
             try {
-                String lineName = inputView.readLineName();
-                Line newLine = stationService.registerLine(lineName);
-                registerStartLine(newLine);
-                registerEndLine(newLine);
+                outputView.writeLineScreen();
+                StationSelectionDTO stationSelectionDTO = getValidatedStationSelection();
+                lineSelection(stationSelectionDTO);
                 break;
             } catch (SubwayException subwayException) {
                 outputView.writeErrorMessage(subwayException.getMessage());
@@ -213,21 +113,12 @@ public class SubwayController {
         }
     }
 
-    private void registerStartLine(Line newLine) {
+    private void routeManagement() {
         while (true) {
             try {
-                stationService.registerStartLine(newLine, inputView.readStartLine());
-                break;
-            } catch (SubwayException subwayException) {
-                outputView.writeErrorMessage(subwayException.getMessage());
-            }
-        }
-    }
-
-    private void registerEndLine(Line newLine) {
-        while (true) {
-            try {
-                stationService.registerEndLine(newLine, inputView.readEndLine());
+                outputView.writeRouteScreen();
+                RouteSelectionDTO routeSelectionDTO = getValidatedRouteSelection();
+                routeSelection(routeSelectionDTO);
                 break;
             } catch (SubwayException subwayException) {
                 outputView.writeErrorMessage(subwayException.getMessage());
@@ -236,11 +127,46 @@ public class SubwayController {
     }
 
     private void registerStation() {
+        stationService.registerStation(inputView.readStationName());
+        outputView.writeStationRegisterInfo();
+    }
+
+    private void registerLine() {
+        String lineName = inputView.readLineName();
+        Line newLine = stationService.registerLine(lineName);
+        stationService.registerStartLine(newLine, inputView.readStartLine());
+        stationService.registerEndLine(newLine, inputView.readEndLine());
+    }
+
+    private void registerRoute() {
+        Line line = stationService.registerLineByRoute(inputView.readLineByRoute());
+        Station station = stationService.registerStationByRoute(inputView.readStationByRoute());
+        int order = stationService.registerOrderByRoute(inputView.readOrderByRoute());
+        stationService.registerRoute(line, station, order);
+        outputView.writeRouteRegister();
+    }
+
+    private void deleteStation() {
+        stationService.deleteStation(inputView.readDeleteStationName());
+        outputView.writeStationDelete();
+    }
+
+    private void deleteLine() {
+        stationService.deleteLine(inputView.readDeleteLineName());
+        outputView.writeLineDelete();
+    }
+
+    private void deleteRoute() {
+        Line line = stationService.deleteLineByRoute(inputView.readDeleteLineNameByRoute());
+        Station station = stationService.deleteStationByRoute(inputView.readDeleteStationNameByRoute());
+        stationService.deleteRoute(line, station);
+        outputView.writeRouteDelete();
+    }
+
+    private MainSelectionDTO getValidatedSelection() {
         while (true) {
             try {
-                stationService.registerStation(inputView.readStationName());
-                outputView.writeStationRegisterInfo();
-                break;
+                return new MainSelectionDTO(inputView.readHopeFunction());
             } catch (SubwayException subwayException) {
                 outputView.writeErrorMessage(subwayException.getMessage());
             }
@@ -257,11 +183,10 @@ public class SubwayController {
         }
     }
 
-
-    private MainSelectionDTO getValidatedSelection() {
+    private RouteSelectionDTO getValidatedRouteSelection() {
         while (true) {
             try {
-                return new MainSelectionDTO(inputView.readHopeFunction());
+                return new RouteSelectionDTO(inputView.readHopeFunction());
             } catch (SubwayException subwayException) {
                 outputView.writeErrorMessage(subwayException.getMessage());
             }
