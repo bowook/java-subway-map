@@ -7,13 +7,13 @@ import subway.domain.Line;
 import subway.domain.Route;
 
 public class RouteRepository {
-    private static final List<Route> routes = new ArrayList<>();
+    private final List<Route> routes = new ArrayList<>();
 
-    public static List<Route> routes() {
+    public List<Route> routes() {
         return Collections.unmodifiableList(routes);
     }
 
-    public static Route findRouteByLine(Line line) {
+    public Route findRouteByLine(Line line) {
         for (Route route : routes) {
             if (route.getRoute().containsKey(line)) {
                 return route;
@@ -22,11 +22,11 @@ public class RouteRepository {
         return null;
     }
 
-    public static void addRoute(Route route) {
+    public void addRoute(Route route) {
         routes.add(route);
     }
 
-    public static void deleteRouteByLine(Line line) {
+    public void deleteRouteByLine(Line line) {
         routes.removeIf(route -> route.getRoute().containsKey(line));
     }
 }

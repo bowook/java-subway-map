@@ -7,21 +7,21 @@ import java.util.Objects;
 import subway.domain.Line;
 
 public class LineRepository {
-    private static final List<Line> lines = new ArrayList<>();
+    private final List<Line> lines = new ArrayList<>();
 
-    public static List<Line> lines() {
+    public List<Line> lines() {
         return Collections.unmodifiableList(lines);
     }
 
-    public static void addLine(Line line) {
+    public void addLine(Line line) {
         lines.add(line);
     }
 
-    public static boolean deleteLineByName(String name) {
+    public boolean deleteLineByName(String name) {
         return lines.removeIf(line -> Objects.equals(line.getName(), name));
     }
 
-    public static Line findLineByName(String lineName) {
+    public Line findLineByName(String lineName) {
         return lines.stream()
                 .filter(line -> line.getName().equals(lineName))
                 .findFirst()

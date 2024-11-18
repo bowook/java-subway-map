@@ -7,21 +7,21 @@ import java.util.Objects;
 import subway.domain.Station;
 
 public class StationRepository {
-    private static final List<Station> stations = new ArrayList<>();
+    private final List<Station> stations = new ArrayList<>();
 
-    public static List<Station> stations() {
+    public List<Station> stations() {
         return Collections.unmodifiableList(stations);
     }
 
-    public static boolean deleteStation(String name) {
+    public boolean deleteStation(String name) {
         return stations.removeIf(station -> Objects.equals(station.getName(), name));
     }
 
-    public static void addStation(Station station) {
+    public void addStation(Station station) {
         stations.add(station);
     }
 
-    public static Station getStation(String name) {
+    public Station getStation(String name) {
         return stations.stream()
                 .filter(station -> Objects.equals(station.getName(), name))
                 .findFirst()
