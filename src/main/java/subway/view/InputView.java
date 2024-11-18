@@ -47,7 +47,7 @@ public class InputView {
         return new Scanner(System.in);
     }
 
-    private void scannerClose() {
+    public void scannerClose() {
         getScanner().close();
     }
 
