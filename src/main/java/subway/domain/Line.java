@@ -4,8 +4,8 @@ import subway.exception.ErrorMessage;
 import subway.exception.SubwayException;
 
 public class Line {
-    private String name;
-
+    private final String name;
+    
     public Line(String name) {
         validate(name);
         this.name = name;
@@ -29,9 +29,6 @@ public class Line {
     private void validateEmpty(String name) {
         if (name == null || name.isEmpty() || name.isBlank()) {
             throw SubwayException.from(ErrorMessage.SUBWAY_STATION_EMPTY_NAME);
-        }
-        if (name.contains(" ")) {
-            throw SubwayException.from(ErrorMessage.SUBWAY_STATION_NAME_CONTAINS_EMPTY_NAME);
         }
     }
 
